@@ -1,0 +1,25 @@
+.top-container{
+    margin-left: 9em;
+}
+.lang-container{
+    border: .063em solid black;
+    font-size: 1.5em;
+    padding: 3em;
+    position: relative;
+    height: 14em;
+}
+.ebuy-member{
+    margin-top: 1.5em;
+    div:nth-child(2){
+        margin-top: 1em;
+    }
+}
+select{
+    width: 100%;
+}
+.select-container{
+    margin-top: 3em;
+}
+.language,.member{
+    width: 100%;
+}

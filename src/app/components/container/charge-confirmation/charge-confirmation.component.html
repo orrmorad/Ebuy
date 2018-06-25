@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="confirmation-container">
+    <!-- <div class="top">
+      <div class="left"> -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">Charge Confirmation</div>
+      </div>
+      <div class="panel-body">
+        <div class="top">
+          <div class="left col-md-4">
+            <div class="panel-body">
+              <div class="form-group credit-card-section">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <div class="panel-title">Credit Card</div>
+                  </div>
+                  <div class="card-container">
+                    <div class="card">
+                      <label for="credit-card-options">Card Type</label>
+                      <input name="credit-card-options" [(ngModel)]="confirmation.creditCardType" type="text" class="form-control">
+                    </div>
+                    <div class="card-number">
+                      <label for="credit-number">Card #</label>
+                      <input name="credit-number" class="form-control" type="text" (input)="numberChanged($event.target.value)" [(ngModel)]="confirmation.cardNumber">
+                    </div>
+                    <div class="card">
+                      <label for="credit-card-owner">Card Owner</label>
+                      <input name="credit-card-owner" [(ngModel)]="confirmation.owner" type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right col-md-8">
+            <form id="confirmation-form" class="form-horizontal" role="form">
+              <label for="delivery-mode">Delivery Mode</label>
+              <input name="delivery-mode" type="text" class="form-control" [(ngModel)]="confirmation.deliveryMode" disabled>
+              <label for="delivery-date">Delivery Date</label>
+              <input name="delivery-date" type="text" class="form-control" [(ngModel)]="confirmation.deliveryDate" disabled>
+              <label for="shipment-option">Shipment Option</label>
+              <input name="shipment-option" type="text" class="form-control" [(ngModel)]="confirmation.shipmentOption" disabled>
+              <label for="cost">Shipment Cost</label>
+              <input name="shipment-const" class="form-control" id="cost" type="text" [(ngModel)]="confirmation.shipmentCost" disabled>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="table-container">
+          <table>
+            <tr>
+              <th *ngFor="let header of headers">
+                {{header}}
+              </th>
+            </tr>
+            <tr *ngFor="let p of confirmation.products">
+              <td>{{p.product.ProductId}}</td>
+              <td>{{p.product.Title}}</td>
+              <td>{{p.product.Price}}</td>
+              <td>{{vat}}%</td>
+              <td>{{p.totalCost}}</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="buttons">
+          <div>
+            <button type="button" class="btn btn-primary"  (click)="calcTotalPrice()">Grand Total Cost</button>
+            <input class="form-control" type="text" [(ngModel)]="confirmation.totalPrice" disabled>
+          </div>
+          <button type="button" class="btn btn-success">Charge Confirmed</button>
+          <button type="button" class="btn btn-danger">Charge Rejected</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

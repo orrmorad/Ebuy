@@ -1,0 +1,30 @@
+<div class="container" >
+  <div class="loginbox mainbox">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">Provide Contact Details
+          <span (click)="close()">X</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <form id="loginform" class="form-horizontal" role="form" (ngSubmit)="submitDetails()">
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="customerId" (ngModelChange)="detaisChanged()" name="Id" value="" placeholder="Id">
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="detaisChanged()" name="name" placeholder="Name">
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="address" (ngModelChange)="detaisChanged()" name="address" placeholder="Address">
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="email" (ngModelChange)="detaisChanged()" name="email" placeholder="Email">
+          </div>
+          <div class="buttons-container">
+            <button type="submit" class="btn btn-primary" [disabled]="!isAllFieldsValid">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.container {
+  margin-top: 11em;
+}
+
+.shipment-container {
+  width: 50em;
+  margin: auto;
+  .panel-container {
+    padding: 3em;
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    button {
+      width: 20em;
+    }
+  }
+  label {
+    margin-top: 1.5em;
+  }
+}
+
+.overlay-shipment {
+  width: 50em;
+  top: 50%;
+  transform: translate(-50%, -44%);
+  left: 50%;
+  z-index: 5;
+  height: 47.6em;
+  margin-top: 2em;
+}
+
+app-address-confirmation-popup {
+  position: absolute;
+  top: 34em;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  z-index: 5;
+}

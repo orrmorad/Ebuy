@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  justify-content: center;
+  .purchase-container {
+    margin-top: 3em;
+    width: 60em;
+  }
+  .input-group {
+    margin-bottom: 2.2em;
+  }
+  .panel-body {
+    padding-top: 30px
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .left-side {
+    margin-top: -2em;
+    .credit-card-section {
+      >.panel-info {
+        width: 30em;
+        display: inline-block;
+      }
+    }
+    label {
+      margin-top: 1.5em;
+    }
+    .card-container {
+      >div {
+        &:nth-child(3),
+        &:nth-child(4) {
+          margin-bottom: 1.5em;
+        }
+      }
+    }
+  }
+  .right-side {
+    margin-top: -1em;
+    .shopping-cart-container {
+      .img-title {
+        display: flex;
+        justify-content: center;
+      }
+      .shopping-list {
+        display: flex;
+        justify-content: center;
+        width: 20em;
+        >div {
+          width: 100%;
+          width: 100%;
+          position: relative;
+          left: 4em;
+        }
+        .table-container {
+          border: .063em solid #ddd;
+          height: 17em;
+        }
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width: 100%;
+          border: .063em solid #ddd;
+          th,
+          td {
+            border: .063em solid #ddd;
+            text-align: center;
+            cursor: default;
+          }
+        }
+        >div {
+          >.buttons {
+            margin-top: 1.8em;
+          }
+        }
+      }
+    }
+  }
+  .bottom {
+    .buttons-continue {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+}
+
+.highlight {
+  background: #7cb97f;
+}
+
+app-shipment-address {
+  top: 30.5em;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

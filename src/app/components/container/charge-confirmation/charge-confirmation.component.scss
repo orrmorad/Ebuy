@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  justify-content: center;
+  .confirmation-container {
+    margin-top: 3em;
+    width: 60em;
+    .card-container {
+      padding: 1em;
+    }
+    .top {
+      display: flex;
+    }
+  }
+  .table-container {
+    border: .063em solid #ddd;
+    height: 17em;
+    margin: 1em;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: .063em solid #ddd;
+    th,
+    td {
+      border: .063em solid #ddd;
+      border-top: 0;
+      text-align: center;
+      cursor: default;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    >div {
+      display: flex;
+      >input {
+        margin-left: 1em;
+      }
+    }
+  }
+}

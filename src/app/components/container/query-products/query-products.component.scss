@@ -1,0 +1,63 @@
+.query-product-container {
+  width: 60em;
+  margin: auto;
+  label,
+  .right-side {
+    margin-top: 1.5em;
+    .panel-body {
+      padding-top: 0em;
+    }
+  }
+  .date-container {
+    width: 100%;
+  }
+  .date-range {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    >div {
+      width: 11em;
+    }
+  }
+}
+
+.shopping-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  >div {
+    width: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .table-container {
+    border: .063em solid #ddd;
+    height: 17em;
+    width: 20em;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: .063em solid #ddd;
+    th,
+    td {
+      border: .063em solid #ddd;
+      text-align: center;
+      cursor: default;
+    }
+  }
+  .tables{
+    display: flex;
+    justify-content: space-around;
+  }
+  >div {
+    >.buttons {
+      margin-top: 1.8em;
+      width: 30em;
+    }
+  }
+}
+.highlight {
+  background: #7cb97f;
+}

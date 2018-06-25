@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  .loginbox {
+    margin-top: 3em;
+    width: 40em;
+  }
+  .input-group {
+    margin-bottom: 2.2em;
+    width: 100%;
+  }
+  .panel-body {
+    padding-top: 30px
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.panel-title {
+  >span {
+    position: relative;
+    left: 21em;
+    &:hover{
+      cursor: pointer;
+      color: #e4df38;
+    }
+  }
+}

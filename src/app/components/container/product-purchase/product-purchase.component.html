@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="purchase-container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">Product Purchasing</div>
+      </div>
+      <div class="panel-body">
+        <div class="left-side col-md-6">
+          <form class="form-horizontal" role="form">
+            <div class="form-group select-options">
+              <label for="delivery-mode">Delivery Mode</label>
+              <select class="form-control" id="delivery-mode" (change)="changeDeliveryMode($event.target.value)">
+                <option disabled selected value> -- select an option -- </option>
+                <option *ngFor="let d of deliveryMode" [value]="d.Mode">{{d.Mode}}</option>
+              </select>
+              <label for="shipment-option">Shipment Option</label>
+              <select class="form-control" id="shipment-option" [disabled]="!isShipmentOptionEnabled" (change)="changeShipmentMode($event.target.value)">
+                <option disabled selected value> -- select an option -- </option>
+                <option *ngFor="let s of shipmentOptions">{{s.data}}</option>
+              </select>
+            </div>
+            <div class="form-group btn-address">
+              <button type="button" class="btn btn-defualt" [disabled]="!deliverySelected" (click)="showAddressDetailsPopup=true">Shipment Address Details...</button>
+            </div>
+            <div class="form-group credit-card-section">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <div class="panel-title">Credit Card</div>
+                </div>
+                <div class="card-container">
+                  <div class="col-md-6">
+                    <label for="credit-card-options">Card Type</label>
+                    <select class="form-control" name="credit-card-options" (change)="typeChanged($event.target.value)">
+                      <option *ngFor="let c of creditCards">{{c.data}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="credit-number">Card #</label>
+                    <input name="credit-number" class="form-control" type="text" (input)="numberChanged($event.target.value)" [(ngModel)]="confirmation.cardNumber">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="expiration">Expiration Date</label>
+                    <input class="form-control" id="expiration" type="text">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="credit-owner">Card Owner</label>
+                    <input name="credit-owner" class="form-control" id="credit-owner" type="text" [(ngModel)]="confirmation.owner">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="right-side col-md-6">
+          <div class="shopping-cart-container">
+            <div class="img-title">
+              <img src="/assets/CartImage.bmp">
+            </div>
+            <div class="shopping-list">
+              <div>
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th>#</th>
+                      <th>Product</th>
+                      <th>Price</th>
+                    </tr>
+                    <tr *ngFor="let p of productsInCart" [ngClass]="{'highlight':p.isSelected}" (click)="highlight(p)">
+                      <td>{{p.product.ProductId}}</td>
+                      <td>{{p.product.Title}}</td>
+                      <td>{{p.product.Price}}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="buttons">
+                  <button type="button" class="btn btn-danger btn-sm" [disabled]='!isRemoveButtonEnabled' (click)="removeFromCart()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove product from cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom col-md-12">
+          <div class="buttons-continue">
+            <button type="button" class="btn btn-primary" (click)="goToConfirmation()" [disabled]="!isFieldsValid">Continue to purchase confirmation</button>
+            <button type="button" class="btn btn-primary" (click)="navigateToQuery()">Query & Purchase Products</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="showAddressDetailsPopup"></div>
+<app-shipment-address *ngIf="showAddressDetailsPopup" (OnClose)="showAddressDetailsPopup=false" [deliveryMode]="selectedDeliveryMode"></app-shipment-address>

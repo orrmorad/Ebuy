@@ -1,0 +1,40 @@
+.login-container {
+  border: .063em solid black;
+  font-size: 1.5em;
+  padding: 3em;
+  position: relative;
+  height: 14em;
+}
+
+.club-member {
+  margin-top: 1.5em;
+  div:nth-child(2) {
+    margin-top: 1em;
+  }
+}
+
+.enter-btn {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.details-btn {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+button {
+  font-size: 1em;
+}
+
+.panel-default {
+  border: 0;
+}
+
+app-register-casual-popup {
+  top: 50%;
+  position: absolute;
+  left: 0;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

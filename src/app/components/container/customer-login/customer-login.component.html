@@ -1,0 +1,40 @@
+<div class="col-sm-5">
+  <div class="login-container">
+    Casual Customer Login
+    <hr>
+    <div class="details-btn">
+      <button class="btn btn-primary" (click)="showPopup=!showPopup">Please provide your contact details</button>
+    </div>
+    <div class="enter-btn">
+      <button class="btn btn-success" [disabled]="!isCasualCustomerContactProvided" (click)="enterCasualCustomer()">Enter Ebuy</button>
+    </div>
+  </div>
+  <app-register-casual-popup *ngIf="showPopup" (OnSubmitDetails)="getDetails($event)" (OnClose)="showPopup=$event"></app-register-casual-popup>
+  <div class="login-container club-member">
+    Ebuy Club Member
+    <hr>
+    <div class="container">
+      <div class="row vertical-offset-100">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div>
+              <form role="form" (ngSubmit)="submit()">
+                <fieldset>
+                  <div class="form-group">
+                    <input class="form-control" placeholder="Login Name" [(ngModel)]="loginName" (ngModelChange)="loginDetailsChanged()" name="login"
+                      type="text">
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" placeholder="Password" name="password" [(ngModel)]="password" (ngModelChange)="loginDetailsChanged()"
+                      type="password" value="">
+                  </div>
+                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Enter Ebuy" [disabled]="!isValidDetailsProvided">
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

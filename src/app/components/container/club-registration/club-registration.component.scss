@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  .loginbox {
+    margin-top: 3em;
+    width: 40em;
+  }
+  .input-group {
+    margin-bottom: 2.2em;
+  }
+  .panel-body {
+    padding-top: 30px
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .form-group{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

@@ -1,0 +1,75 @@
+<div class="container">
+  <!-- <div class="overlay overlay-shipment" *ngIf="showPopup"></div> -->
+  <div class="shipment-container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">Shipment Address Details</div>
+      </div>
+      <div class="panel-body panel-container">
+        <div class="hard-copy" *ngIf="deliveryMode=='hard'">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <div class="panel-title">Hard Copy Delivery</div>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal" role="form">
+                <div class="left-side col-md-6">
+                  <label for="country">Country</label>
+                  <select class="form-control" name="country" (change)="changeCountry($event.target.value)">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option *ngFor="let c of countries">{{c}}</option>
+                  </select>
+                  <div>
+                    <label for="street">Street</label>
+                    <input name="street" class="form-control" type="text" [(ngModel)]="street">
+                  </div>
+                  <div>
+                    <label for="house">House #</label>
+                    <input name="house" class="form-control" type="number" [(ngModel)]="houserNumber">
+                    <label for="house">City</label>
+                    <input name="City" class="form-control" type="number" [(ngModel)]="city">
+                  </div>
+                </div>
+                <div class="right-side col-md-6">
+                  <label for="state">State</label>
+                  <select class="form-control" name="state" [disabled]="!isStateEnabled">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option *ngFor="let s of states">{{s}}</option>
+                  </select>
+                    <label for="zip">Zip Code</label>
+                    <input name="zip" class="form-control" type="text" [(ngModel)]="zipCode">
+                    <label for="pob">POB (Optional)</label>
+                    <input name="pob" class="form-control" type="text" [(ngModel)]="pob">
+                    <label for="reciever">Reciever Name</label>
+                    <input name="reciever" class="form-control" type="text" [(ngModel)]="reciever">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="hard-copy" *ngIf="deliveryMode=='electronically'">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <div class="panel-title">Electronic Delivery</div>
+            </div>
+            <div class="panel-body">
+              <div>
+                <label for="email">Email Address</label>
+                <input name="email" class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom col-md-12">
+          <div class="buttons-container">
+            <button type="button" class="btn btn-success">OK</button>
+            <button type="button" class="btn btn-danger" (click)="showPopup=true">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- <div class="overlay" *ngIf="showPopup"></div> -->
+<app-address-confirmation-popup *ngIf="showPopup" (OnCancel)="showPopup=false" (OnConfirm)="onClose()"></app-address-confirmation-popup>

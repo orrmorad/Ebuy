@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="loginbox mainbox">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">Club Registration</div>
+      </div>
+      <div class="panel-body">
+        <form id="loginform" class="form-horizontal" (ngSubmit)="add()" role="form" autocomplete="off">
+            <div class="form-group" [class.has-error]="customer.invalid && customer.touched">
+                <input id="customer-id" [(ngModel)]="customerId" (ngModelChange)="changeModel()" type="number" class="form-control" name="customer-id"
+                  #customer="ngModel" value="" placeholder="ID" required>
+                <span class="help-block" *ngIf="customer.errors?.required && customer.touched">ID Required</span>
+              </div>
+          <div class="form-group" [class.has-error]="username.invalid && username.touched">
+            <input id="login-username" [(ngModel)]="loginName" (ngModelChange)="changeModel()" type="text" class="form-control" name="username"
+              #username="ngModel" value="" placeholder="Login Name" required>
+            <span class="help-block" *ngIf="username.errors?.required && username.touched">Login name is required</span>
+          </div>
+          <div class="form-group" [class.has-error]="password1.invalid && password1.touched">
+            <input id="login-password" type="password" [(ngModel)]="password" (ngModelChange)="validatePassword()" class="form-control"
+              name="password1" #password1="ngModel" placeholder="Password" required>
+            <span class="help-block" *ngIf="password1.errors?.required && password1.touched">Password name is required</span>
+          </div>
+          <div class="form-group" [class.has-error]="confirmPassword.invalid && confirmPassword.touched">
+            <input id="re-enter-password" type="password" [(ngModel)]="reEnterPassword" (ngModelChange)="validatePassword()" class="form-control"
+              name="confirmPassword" #confirmPassword="ngModel" placeholder="Re-Enter password" required appConfirmEqualValidator="password1">
+            <span class="help-block" *ngIf="confirmPassword.errors?.required && confirmPassword.touched">Re-enter password</span>
+            <span class="help-block" *ngIf="confirmPassword.errors?.notEqual && confirmPassword.touched">Password doesn't match</span>
+          </div>
+          <div class="form-group" [class.has-error]="mail.invalid && mail.touched">
+            <input id="email" type="text" [(ngModel)]="email" (ngModelChange)="validateEmail()" class="form-control" name="mail" #mail="ngModel"
+              value="" placeholder="Enter Email Address" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+            <span class="help-block" *ngIf="mail.errors?.required && mail.touched">Email is required</span>
+            <span class="help-block" *ngIf="mail.errors?.pattern && mail.touched">Email is invalid</span>
+          </div>
+          <div class="form-group" [class.has-error]="country1.invalid && country1.touched">
+              <input id="countryId" type="text" [(ngModel)]="country" (ngModelChange)="changeModel()" class="form-control" name="city1"
+                #country1="ngModel" value="" placeholder="Enter Country" required>
+                <span class="help-block" *ngIf="country1.errors?.required && country1.touched">country is required</span>
+            </div>
+          <div class="form-group" [class.has-error]="city1.invalid && city1.touched">
+            <input id="cityId" type="text" [(ngModel)]="city" (ngModelChange)="changeModel()" class="form-control" name="city1"
+              #city1="ngModel" value="" placeholder="Enter City" required>
+              <span class="help-block" *ngIf="city1.errors?.required && city1.touched">city is required</span>
+          </div>
+          <div class="form-group" [class.has-error]="street1.invalid && street1.touched">
+              <input id="street1Id" type="text" [(ngModel)]="street" (ngModelChange)="changeModel()" class="form-control" name="street1"
+                #street1="ngModel" value="" placeholder="Enter Street" required>
+                <span class="help-block" *ngIf="street1.errors?.required && street1.touched">street is required</span>
+            </div>
+            <div class="form-group" [class.has-error]="houseNumber1.invalid && houseNumber1.touched">
+                <input id="houseNumberId" type="text" [(ngModel)]="houseNumber" (ngModelChange)="changeModel()" class="form-control" name="houseNumber1"
+                  #houseNumber1="ngModel" value="" placeholder="Enter House Number" required>
+                  <span class="help-block" *ngIf="houseNumber1.errors?.required && houseNumber1.touched">house number is required</span>
+              </div>
+          <div class="form-group" [class.has-error]="phone.invalid && phone.touched">
+            <input id="phone" type="text" [(ngModel)]="phoneNumber" (ngModelChange)="changeModel()" class="form-control" name="phone"
+              #phone="ngModel" value="" placeholder="Enter Phone Number" required pattern="[0-9]*">
+            <span class="help-block" *ngIf="phone.errors?.required && phone.touched">Phone number is required</span>
+            <span class="help-block" *ngIf="phone.errors?.pattern && phone.touched">Phone number is invalid</span>
+          </div>
+
+          <div class="buttons-container">
+            <button type="submit" class="btn btn-primary" [disabled]="!isValidDetailsProvided">Confirm Club Registration</button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">Cancel Club Registration</button>
+          </div>
+        </form>
+        <div style="margin-top: 2em;">*For BOGO information contact: support@rock.com</div>
+      </div>
+    </div>
+  </div>
+</div>

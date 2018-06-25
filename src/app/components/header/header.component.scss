@@ -1,0 +1,18 @@
+.jumbotron{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important; 
+}
+.logo {
+  background-image: url(/assets/logo1.jpg);
+  width: 11em;
+  height: 10em;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.title{
+  height: 10em;
+  display: flex;
+}
+.title-container{
+  padding-left: 0 !important;
+}

@@ -1,0 +1,62 @@
+{
+  "clubMembers": [{
+    "UserId": 200955805,
+    "LoginName": "orrmorad",
+    "Password": "1234",
+    "Address": "Tel Aviv"
+  }],
+  "casualCustomers": [{
+
+  }],
+  "productsInStore": [{
+      "ProductId": 3,
+      "CategoryId": 1,
+      "Author": "Markus Zusak",
+      "Title": "The Book Thief",
+      "PublicationDate": "7/12/1993",
+      "ProductAbstract": "aa"
+    },
+    {
+      "ProductId": 4,
+      "CategoryId": 2,
+      "Author": "Stephenie Meyer",
+      "Title": "Twilight",
+      "PublicationDate": "6/4/2012",
+      "ProductAbstract": "aa"
+    }
+  ],
+  "productsInCart": [{
+      "ProductId": 1,
+      "CategoryId": 1,
+      "Author": "J K Rolling",
+      "Title": "Harry Potter",
+      "PublicationDate": "1/1/1997",
+      "ProductAbstract": "aa"
+    },
+    {
+      "ProductId": 2,
+      "CategoryId": 2,
+      "Author": "Suzanne Collins",
+      "Title": "The Hunger Games",
+      "PublicationDate": "21/6/2006",
+      "ProductAbstract": "aa"
+    }
+  ],
+  "prices": [{
+      "ProductId": 1,
+      "ProductPrice": 200
+    },
+    {
+      "ProductId": 2,
+      "ProductPrice": 250
+    },
+    {
+      "ProductId": 3,
+      "ProductPrice": 300
+    },
+    {
+      "ProductId": 4,
+      "ProductPrice": 100
+    }
+  ]
+}

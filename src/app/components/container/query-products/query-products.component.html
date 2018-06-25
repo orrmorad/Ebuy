@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="query-product-container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Query For Products
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Enter Query Criteria
+            </div>
+          </div>
+          <div class="panel-body">
+            <form class="form-horizontal" role="form" autocomplete="off">
+              <div class="left-side col-md-6">
+                <div>
+                  <label for="authorname">Author</label>
+                  <input name="authorname" class="form-control" type="text" [(ngModel)]="author">
+                </div>
+                <div>
+                  <label for="productTitle">Title</label>
+                  <input name="productTitle" class="form-control" type="text" [(ngModel)]="title">
+                </div>
+                <div>
+                  <label for="keyword">Keywords</label>
+                  <input [(ngModel)]="keyword" name="keyword" class="form-control" type="text">
+                </div>
+                <div>
+                  <label for="categoryType">Category</label>
+                  <input [(ngModel)]="category" name="categoryType" class="form-control" type="text">
+                </div>
+              </div>
+              <div class="right-side col-md-6">
+                <div class="panel panel-warning">
+                  <div class="panel-heading">
+                    <div class="panel-title">
+                      Publication Date
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    <div class="input-group">
+                      <div>
+                        <input class="form-check-input" name="specific" type="radio" (change)="isSpecificChecked=!isSpecificChecked" checked>
+                        <label class="form-check-label" for="specific">Specific Date</label>
+                      </div>
+                      <div>
+                        <input type="date" name="specificDate" class="form-control" [(ngModel)]="specificDate" [disabled]="!isSpecificChecked">
+                      </div>
+                    </div>
+                    <div class="input-group date-container">
+                      <div>
+                        <input class="form-check-input" name="specific" type="radio" (change)="isSpecificChecked=!isSpecificChecked">
+                        <label class="form-check-label" for="range">Range Of Dates</label>
+                      </div>
+                      <div class="date-range">
+                        <div>
+                          <label for="start">Start Date</label>
+                          <input name="start" class="form-control" type="date" [(ngModel)]="startDate" [disabled]="isSpecificChecked">
+                        </div>
+                        <div>
+                          <label for="end">End Date</label>
+                          <input name="end" class="form-control" type="date" [(ngModel)]="endDate" [disabled]="isSpecificChecked">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <button (click)="getResults()" class="btn btn-success">Get Results</button>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Query Results
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="shopping-list">
+          <div>
+            <div class="tables">
+              <div class="table-container">
+                <table>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                  </tr>
+                  <tr *ngFor="let p of productsList" [ngClass]="{'highlight':p.isSelected}" (click)="selectProduct(p)">
+                    <td>{{p.Title}}</td>
+                    <td>{{p.Price}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="table-container" *ngIf="isCartDisplayed">
+                <table>
+                  <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                  </tr>
+                  <tr *ngFor="let p of productsInCart">
+                    <td>{{p.product.ProductId}}</td>
+                    <td>{{p.product.Title}}</td>
+                    <td>{{p.product.Price}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="buttons">
+              <button type="button" class="btn btn-success" (click)="addToCart()">
+                <span class="glyphicon glyphicon-plus"></span> Add to cart
+              </button>
+              <button type="button" class="btn btn-warning" (click)="navgiateToPurchasePage()">
+                Back to purchasing
+              </button>
+              <button type="button" class="btn btn-info" (click)="isCartDisplayed=!isCartDisplayed">
+                Display Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

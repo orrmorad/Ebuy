@@ -1,0 +1,36 @@
+.administration-container {
+  width: 60em;
+  margin: auto;
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    th,
+    td {
+      border: .063em solid #ddd;
+      border-top: 0;
+      text-align: center;
+      cursor: default;
+    }
+  }
+  .table-container {
+    height: 12em;
+    border: .063em solid #ddd;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    button{
+        font-size: 14px !important;
+        color: white;
+    }
+  }
+  .bottom{
+      .buttons{
+          button{
+              width: 10em;
+              background: dodgerblue;
+          }
+      }
+  }
+}
