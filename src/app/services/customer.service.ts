@@ -19,17 +19,24 @@ export class CustomerService {
       .catch(this.handleErrorObservable);
   }
 
+  getClubMember(id: number) {
+    return this.http.get(uri + `/customer/GetClubMember/${id}`)
+      .map(response => response.json())
+      .catch(this.handleErrorObservable);
+  }
+
   addClubMember(customerId: number, loginName: string, password: string, country: ICountry,
     city: string, street: string, houseNumber: number, email: string, phone: string, firstRegistration: Date) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
     var body = {
-      'customerId': customerId,
+      'MemberId': customerId,
       'LoginName': loginName,
       'Password': password,
       'Country': country,
       'City': city,
+      'Street': street,
       'HouseNumber': houseNumber,
       'Email': email,
       'Phone': phone,
@@ -59,9 +66,15 @@ export class CustomerService {
       .catch(this.handleErrorObservable);
   }
 
-  private handleErrorObservable(error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.message || error);
+  getCountries() {
+    return this.http.get(uri + '/customer/GetCountries')
+      .map(response => response.json())
+      .catch(this.handleErrorObservable);
   }
+
+  private handleErrorObservable(error: Response | any) {
+  console.error(error.message || error);
+  return Observable.throw(error.message || error);
+}
 
 }

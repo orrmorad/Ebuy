@@ -18,7 +18,7 @@ export class ClubRegistrationComponent implements OnInit {
   city: string = '';
   country: string = '';
   street: string = '';
-  houseNumber: number = 0;
+  houseNumber: number;
   phoneNumber: string = '';
   isPasswordMatch: boolean = true;
   isEmailValid: boolean = true;
@@ -27,6 +27,7 @@ export class ClubRegistrationComponent implements OnInit {
   errorMessage: string;
   countries: ICountry[] = [];
   shipmentAreas: IShipmentArea[] = [];
+
 
   constructor(private router: Router, private customerService: CustomerService, private bookStoreService: BookStoreService) { }
 
@@ -37,7 +38,7 @@ export class ClubRegistrationComponent implements OnInit {
 
   getCountries() {
     this.bookStoreService.getCountries().
-      subscribe(response => this.countries = response)
+      subscribe(response => { this.countries = response })
   }
 
   getShipmentAreas() {
@@ -80,11 +81,10 @@ export class ClubRegistrationComponent implements OnInit {
   add() {
     var index = this.countries.findIndex(c => c.Country == this.country);
     var memberCountry = this.countries[index];
-    debugger;
     this.customerService.addClubMember(this.customerId, this.loginName, this.password,
       memberCountry, this.city, this.street, this.houseNumber, this.email, this.phoneNumber, new Date())
       .subscribe(response => {
-        return;
+        this.router.navigate(['./home']);
       },
         error => this.errorMessage = <any>error)
   }

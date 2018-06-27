@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryMode, ShipmentOption, CreditCardType, IProduct, IPrice, IDelivery } from '../../../../Models';
+import { DeliveryMode, ShipmentOption, CreditCardType, IProduct, IPrice, IDelivery, ITransaction } from '../../../../Models';
 import { Confirmation } from '../charge-confirmation/charge-confirmation.component';
 import { ProductService } from '../../../services/product.service';
 import { PurchaseService } from '../../../services/purchase.service';
@@ -18,7 +18,6 @@ import { ProductInCart } from '../query-products/query-products.component';
 export class ProductPurchaseComponent implements OnInit {
 
   deliveryMode: IDelivery[];
-
   deliveryModes: IDeliveryMode[];
   shipmentOptions: IShipmentOption[];
   creditCards: ICardType[];
@@ -144,6 +143,10 @@ export class ProductPurchaseComponent implements OnInit {
   navigateToQuery() {
     this.router.navigate(['./queryproducts']);
   }
+
+  confirm(e) {
+    debugger;
+  }
 }
 
 export interface IDeliveryMode {
@@ -171,6 +174,6 @@ export class productsInCart {
     this.productId = id;
     this.productName = name;
     this.price = price;
-    
+
   }
 }

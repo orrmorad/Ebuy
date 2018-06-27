@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IDeliveryMode, IShipmentOption, ICardType } from '../product-purchase/product-purchase.component';
-import { DeliveryMode, ShipmentOption, CreditCardType, IProduct } from '../../../../Models';
+import { DeliveryMode, ShipmentOption, CreditCardType, ITransaction } from '../../../../Models';
 import { BookStoreService } from '../../../services/book-store.service';
 import { ProductInCart } from '../query-products/query-products.component';
 
@@ -20,6 +20,8 @@ export class ChargeConfirmationComponent implements OnInit {
   confirmation: Confirmation = new Confirmation();
   productsInCart: ProductInCart[];
   vat: number = vat;
+  transaction: ITransaction = {} as ITransaction;
+  isElectronically: boolean;
 
   constructor(private bookStoreService: BookStoreService) { }
 
@@ -29,7 +31,11 @@ export class ChargeConfirmationComponent implements OnInit {
 
     this.bookStoreService.confirm.subscribe(confirmation => {
       this.confirmation = confirmation;
+      var a = Number(DeliveryMode[confirmation.deliveryMode]);
+      this.isElectronically = a == 0;
       this.confirmation.totalPrice = 0;
+      this.transaction.CreditCardType = this.confirmation.creditCardType;
+      this.transaction.DeliveryMode = this.confirmation.deliveryMode;
     });
     this.bookStoreService.cart.subscribe(cart => {
       this.confirmation.products = cart;
@@ -58,4 +64,5 @@ export class Confirmation {
   products: ProductInCart[];
   shipmentCost: number;
   totalPrice: number;
+  email: string;
 }

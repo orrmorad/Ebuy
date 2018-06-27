@@ -93,4 +93,4 @@
   </div>
 </div>
 <div class="overlay" *ngIf="showAddressDetailsPopup"></div>
-<app-shipment-address *ngIf="showAddressDetailsPopup" (OnClose)="showAddressDetailsPopup=false" [deliveryMode]="selectedDeliveryMode"></app-shipment-address>
+<app-shipment-address *ngIf="showAddressDetailsPopup" (OnClose)="showAddressDetailsPopup=false" (OnCloseConfirm)="showAddressDetailsPopup=false; confirm($event)" [deliveryMode]="selectedDeliveryMode"></app-shipment-address>

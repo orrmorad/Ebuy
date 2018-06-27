@@ -40,10 +40,16 @@
               <input name="delivery-mode" type="text" class="form-control" [(ngModel)]="confirmation.deliveryMode" disabled>
               <label for="delivery-date">Delivery Date</label>
               <input name="delivery-date" type="text" class="form-control" [(ngModel)]="confirmation.deliveryDate" disabled>
-              <label for="shipment-option">Shipment Option</label>
-              <input name="shipment-option" type="text" class="form-control" [(ngModel)]="confirmation.shipmentOption" disabled>
-              <label for="cost">Shipment Cost</label>
-              <input name="shipment-const" class="form-control" id="cost" type="text" [(ngModel)]="confirmation.shipmentCost" disabled>
+              <div *ngIf=!isElectronically>
+                <label for="shipment-option">Shipment Option</label>
+                <input name="shipment-option" type="text" class="form-control" [(ngModel)]="confirmation.shipmentOption" disabled>
+                <label for="cost">Shipment Cost</label>
+                <input name="shipment-const" class="form-control" id="cost" type="text" [(ngModel)]="confirmation.shipmentCost" disabled>
+              </div>
+              <div *ngIf="isElectronically">
+                <label for="email">Email</label>
+                <input name="email" type="text" class="form-control" [(ngModel)]="confirmation.email" disabled>
+              </div>
             </form>
           </div>
         </div>
@@ -69,7 +75,7 @@
         </div>
         <div class="buttons">
           <div>
-            <button type="button" class="btn btn-primary"  (click)="calcTotalPrice()">Grand Total Cost</button>
+            <button type="button" class="btn btn-primary" (click)="calcTotalPrice()">Grand Total Cost</button>
             <input class="form-control" type="text" [(ngModel)]="confirmation.totalPrice" disabled>
           </div>
           <button type="button" class="btn btn-success">Charge Confirmed</button>

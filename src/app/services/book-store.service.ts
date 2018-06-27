@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Http } from '@angular/http';
 import { ProductInCart } from '../components/container/query-products/query-products.component';
 import { Confirmation } from '../components/container/charge-confirmation/charge-confirmation.component'
-import { IProduct, IPurchasedProduct, DeliveryMode, IShipmentArea, ICountry } from '../../Models';
+import { IProduct, IPurchasedProduct, DeliveryMode, IShipmentArea, ICountry, IClubMember } from '../../Models';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';

@@ -83,8 +83,9 @@ export interface ICompany {
 
 export interface IShipmentDetails {
     TransactionId: number;
-    Country: string;
+    Country: ICountry;
     State: string;
+    City: string;
     ZipCode: number;
     Street: string;
     HouseNumber: number;

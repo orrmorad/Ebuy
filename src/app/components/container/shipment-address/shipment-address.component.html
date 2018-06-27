@@ -15,9 +15,8 @@
               <form class="form-horizontal" role="form">
                 <div class="left-side col-md-6">
                   <label for="country">Country</label>
-                  <select class="form-control" name="country" (change)="changeCountry($event.target.value)">
-                    <option disabled selected value> -- select an option -- </option>
-                    <option *ngFor="let c of countries">{{c}}</option>
+                  <select class="form-control" name="country" [(ngModel)]="selectedCountryId" (ngModelChange)="changeCountry()">
+                    <option *ngFor="let c of countries" [value]="c.CountryId">{{c.Country}}</option>
                   </select>
                   <div>
                     <label for="street">Street</label>
@@ -25,23 +24,23 @@
                   </div>
                   <div>
                     <label for="house">House #</label>
-                    <input name="house" class="form-control" type="number" [(ngModel)]="houserNumber">
+                    <input name="house" class="form-control" type="number" [(ngModel)]="houseNumber">
                     <label for="house">City</label>
-                    <input name="City" class="form-control" type="number" [(ngModel)]="city">
+                    <input name="City" class="form-control" type="text" [(ngModel)]="city">
                   </div>
                 </div>
                 <div class="right-side col-md-6">
                   <label for="state">State</label>
-                  <select class="form-control" name="state" [disabled]="!isStateEnabled">
+                  <select class="form-control" name="state" [disabled]="!isStateEnabled" [(ngModel)]="state">
                     <option disabled selected value> -- select an option -- </option>
-                    <option *ngFor="let s of states">{{s}}</option>
+                    <option *ngFor="let s of states" [value]="s">{{s}}</option>
                   </select>
-                    <label for="zip">Zip Code</label>
-                    <input name="zip" class="form-control" type="text" [(ngModel)]="zipCode">
-                    <label for="pob">POB (Optional)</label>
-                    <input name="pob" class="form-control" type="text" [(ngModel)]="pob">
-                    <label for="reciever">Reciever Name</label>
-                    <input name="reciever" class="form-control" type="text" [(ngModel)]="reciever">
+                  <label for="zip">Zip Code</label>
+                  <input name="zip" class="form-control" type="text" [(ngModel)]="zipCode">
+                  <label for="pob">POB (Optional)</label>
+                  <input name="pob" class="form-control" type="text" [(ngModel)]="pob">
+                  <label for="reciever">Reciever Name</label>
+                  <input name="reciever" class="form-control" type="text" [(ngModel)]="reciever">
                 </div>
               </form>
             </div>
@@ -62,7 +61,7 @@
         </div>
         <div class="bottom col-md-12">
           <div class="buttons-container">
-            <button type="button" class="btn btn-success">OK</button>
+            <button type="button" class="btn btn-success" (click)="onCloseAccept()">OK</button>
             <button type="button" class="btn btn-danger" (click)="showPopup=true">Cancel</button>
           </div>
         </div>
@@ -72,4 +71,4 @@
   </div>
 </div>
 <!-- <div class="overlay" *ngIf="showPopup"></div> -->
-<app-address-confirmation-popup *ngIf="showPopup" (OnCancel)="showPopup=false" (OnConfirm)="onClose()"></app-address-confirmation-popup>
+<app-address-confirmation-popup *ngIf="showPopup" (OnCancel)="showPopup=false" (OnConfirm)="onCloseCancel()"></app-address-confirmation-popup>
