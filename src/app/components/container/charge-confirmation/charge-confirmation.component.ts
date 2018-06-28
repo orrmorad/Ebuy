@@ -36,6 +36,9 @@ export class ChargeConfirmationComponent implements OnInit {
       this.confirmation.totalPrice = 0;
       this.transaction.CreditCardType = this.confirmation.creditCardType;
       this.transaction.DeliveryMode = this.confirmation.deliveryMode;
+      this.transaction.ShipmentCost = this.confirmation.shipmentCost;
+      this.transaction.ShipmentOption = this.confirmation.shipmentOption;
+      debugger;
     });
     this.bookStoreService.cart.subscribe(cart => {
       this.confirmation.products = cart;
@@ -50,7 +53,9 @@ export class ChargeConfirmationComponent implements OnInit {
     this.confirmation.products.forEach(p => {
       this.confirmation.totalPrice += p.totalCost;
     });
-    this.confirmation.totalPrice += this.confirmation.shipmentCost;
+    this.confirmation.totalPrice += this.confirmation.shipmentCost ? this.confirmation.shipmentCost : 0;
+    this.transaction.TotalCost = this.confirmation.totalPrice;
+    debugger;
   }
 }
 

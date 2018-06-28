@@ -29,7 +29,7 @@ export class ProductPurchaseComponent implements OnInit {
   deliverySelected: boolean = false;
   shipmentValid: boolean = true;
   isFieldsValid: boolean = false;
-  shipmentMode: IShipmentOption;
+  shipmentMode: ShipmentOption;
   showAddressDetailsPopup: boolean = false;
   productsObservable: Observable<IProduct[]>;
   productId: number;
@@ -106,6 +106,7 @@ export class ProductPurchaseComponent implements OnInit {
   }
 
   checkIfValid() {
+    this.confirmation.shipmentOption = this.shipmentMode;
     this.bookStoreService.createConfirmation(this.confirmation);
     this.isFieldsValid = this.productsInCart.length != 0 && this.deliverySelected && this.shipmentValid && this.cardNumber != 0;
   }
