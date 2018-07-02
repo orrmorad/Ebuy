@@ -33,7 +33,9 @@
   .table-container {
     border: .063em solid #ddd;
     height: 17em;
-    width: 20em;
+    width: 22em;
+    overflow: scroll;
+    overflow-x: hidden;
   }
   table {
     border-collapse: collapse;
@@ -60,4 +62,12 @@
 }
 .highlight {
   background: #7cb97f;
+}
+
+.tableHeaderProducts {
+  margin-left: 6em;
+}
+
+.tableHeaderCart{
+  margin-left: 8em;
 }

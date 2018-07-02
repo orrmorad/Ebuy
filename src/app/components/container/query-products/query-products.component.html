@@ -81,35 +81,45 @@
           Query Results
         </div>
       </div>
+      <!-- <div class="tableHeaders">
+          <label class="allProductsHeader">All Products</label>
+          <label class="cartHeader" *ngIf="isCartDisplayed">cart</label>
+      </div> -->
       <div class="panel-body">
         <div class="shopping-list">
           <div>
             <div class="tables">
-              <div class="table-container">
-                <table>
-                  <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                  </tr>
-                  <tr *ngFor="let p of productsList" [ngClass]="{'highlight':p.isSelected}" (click)="selectProduct(p)">
-                    <td>{{p.Title}}</td>
-                    <td>{{p.Price}}</td>
-                  </tr>
-                </table>
+              <div>
+                <label class="tableHeaderProducts">All Products</label>
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th>Product</th>
+                      <th>Price</th>
+                    </tr>
+                    <tr *ngFor="let p of productsList" [ngClass]="{'highlight':p.isSelected}" (click)="selectProduct(p)">
+                      <td>{{p.Title}}</td>
+                      <td>{{p.Price}}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
-              <div class="table-container" *ngIf="isCartDisplayed">
-                <table>
-                  <tr>
-                    <th>#</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                  </tr>
-                  <tr *ngFor="let p of productsInCart">
-                    <td>{{p.product.ProductId}}</td>
-                    <td>{{p.product.Title}}</td>
-                    <td>{{p.product.Price}}</td>
-                  </tr>
-                </table>
+              <div *ngIf="isCartDisplayed">
+                <label class="tableHeaderCart">cart</label>
+                <div class="table-container" >
+                  <table>
+                    <tr>
+                      <th>#</th>
+                      <th>Product</th>
+                      <th>Price</th>
+                    </tr>
+                    <tr *ngFor="let p of productsInCart">
+                      <td>{{p.product.ProductId}}</td>
+                      <td>{{p.product.Title}}</td>
+                      <td>{{p.product.Price}}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
             <div class="buttons">
@@ -119,7 +129,10 @@
               <button type="button" class="btn btn-warning" (click)="navgiateToPurchasePage()">
                 Back to purchasing
               </button>
-              <button type="button" class="btn btn-info" (click)="isCartDisplayed=!isCartDisplayed">
+              <button type="button" *ngIf="isCartDisplayed" class="btn btn-info" (click)="isCartDisplayed=!isCartDisplayed">
+                Hide Cart
+              </button>
+              <button type="button" *ngIf="!isCartDisplayed" class="btn btn-info" (click)="isCartDisplayed=!isCartDisplayed">
                 Display Cart
               </button>
             </div>

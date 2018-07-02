@@ -20,7 +20,7 @@ export class QueryProductsComponent implements OnInit {
   productsInCart: ProductInCart[] = [];
   tempProductsInCart: ProductInCart[] = [];
   products: IProduct[];
-  isCartDisplayed: boolean = false;
+  isCartDisplayed: boolean = true;
   author: string;
   title: string;
   keyword: string;
@@ -35,6 +35,7 @@ export class QueryProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
+    this.getResults()
     this.bookStoreService.cart.subscribe(products => this.productsInCart = products);
   }
 
@@ -55,11 +56,19 @@ export class QueryProductsComponent implements OnInit {
 
   selectProduct(product) {
     product.isSelected = !product.isSelected;
-    this.tempProductsInCart.push(new ProductInCart(product));
+    // this.tempProductsInCart.push(new ProductInCart(product));
   }
 
   addToCart() {
-    this.bookStoreService.addToCart(this.tempProductsInCart);
+    this.tempProductsInCart = [];
+    this.productsList.forEach((product, index) => {
+      if (product.isSelected) {
+        this.tempProductsInCart.push(new ProductInCart(product));
+      }
+      product.isSelected = false;
+    });
+    this.productsInCart = this.productsInCart.concat(this.tempProductsInCart);
+    this.bookStoreService.addToCart(this.productsInCart);
   }
 
   navgiateToPurchasePage() {

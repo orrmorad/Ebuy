@@ -13,6 +13,7 @@ export interface IProduct {
     PublicationDate: Date;
     ProductAbstract: string;
     Price: number;
+    isSelected : boolean;
 }
 
 export interface IPurchasedProduct {
