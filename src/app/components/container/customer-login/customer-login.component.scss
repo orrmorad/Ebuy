@@ -3,7 +3,7 @@
   font-size: 1.5em;
   padding: 3em;
   position: relative;
-  height: 14em;
+  height: 16em;
 }
 
 .club-member {
@@ -37,4 +37,9 @@ app-register-casual-popup {
   left: 0;
   transform: translate(-50%, -50%);
   z-index: 1;
+}
+
+.errorLabel{
+  color: red;
+  font-size: 0.7em;
 }

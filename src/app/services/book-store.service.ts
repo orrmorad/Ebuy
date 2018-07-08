@@ -56,6 +56,12 @@ export class BookStoreService {
       .catch(this.handleErrorObservable);
   }
 
+  getShipmentPrices(){
+    return this.http.get(uri + '/values/GetShipmentPrices')
+      .map(response => response)
+      .catch(this.handleErrorObservable);
+  }
+
   private handleErrorObservable(error: Response | any) {
     console.error(error.message || error);
     return Observable.throw(error.message || error);

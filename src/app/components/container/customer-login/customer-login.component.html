@@ -31,6 +31,9 @@
                   <input class="btn btn-lg btn-success btn-block" type="submit" value="Enter Ebuy" [disabled]="!isValidDetailsProvided">
                 </fieldset>
               </form>
+              <span>
+                <label class="errorLabel" *ngIf="loginError">The login name or password are not correct</label>
+              </span>
             </div>
           </div>
         </div>

@@ -55,6 +55,8 @@
         .table-container {
           border: .063em solid #ddd;
           height: 17em;
+          overflow: scroll;
+          overflow-x: hidden;
         }
         table {
           border-collapse: collapse;

@@ -36,15 +36,15 @@
                   </div>
                   <div class="col-md-6">
                     <label for="credit-number">Card #</label>
-                    <input name="credit-number" class="form-control" type="text" (input)="numberChanged($event.target.value)" [(ngModel)]="confirmation.cardNumber">
+                    <input name="credit-number" class="form-control" type="text" (input)="checkIfValid()" [(ngModel)]="confirmation.cardNumber">
                   </div>
                   <div class="col-md-6">
                     <label for="expiration">Expiration Date</label>
-                    <input class="form-control" id="expiration" type="text">
+                    <input name="expiration" class="form-control" id="expiration" type="text" (input)="checkIfValid()"  [(ngModel)]="confirmation.expiration">
                   </div>
                   <div class="col-md-6">
                     <label for="credit-owner">Card Owner</label>
-                    <input name="credit-owner" class="form-control" id="credit-owner" type="text" [(ngModel)]="confirmation.owner">
+                    <input name="credit-owner" class="form-control" id="credit-owner" type="text" (input)="checkIfValid()" [(ngModel)]="confirmation.owner">
                   </div>
                 </div>
 
@@ -66,7 +66,7 @@
                       <th>Product</th>
                       <th>Price</th>
                     </tr>
-                    <tr *ngFor="let p of productsInCart" [ngClass]="{'highlight':p.isSelected}" (click)="highlight(p)">
+                    <tr *ngFor="let p of productsInCart; let i = index" [ngClass]="{'highlight':p.isSelected}" (click)="highlight(p,i)">
                       <td>{{p.product.ProductId}}</td>
                       <td>{{p.product.Title}}</td>
                       <td>{{p.product.Price}}</td>

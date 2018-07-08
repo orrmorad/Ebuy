@@ -18,6 +18,7 @@ export class CustomerLoginComponent implements OnInit {
   password: string = "";
   showPopup: boolean = false;
   loggedInUser: IClubMember;
+  loginError: boolean;
 
   constructor(private http: Http, private customerService: CustomerService, private router: Router) { }
 
@@ -47,9 +48,9 @@ export class CustomerLoginComponent implements OnInit {
   }
 
   submit() {
+    this.loginError = false;
     this.clubMembers.forEach(member => {
-      if (member.LoginName === this.loginName) {
-        if (member.Password === this.password) {
+      if (member.LoginName === this.loginName && member.Password === this.password) {
           this.customerService.getClubMember(member.MemberId)
             .subscribe(
               response => {
@@ -57,10 +58,13 @@ export class CustomerLoginComponent implements OnInit {
                 localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
               }
             )
-        };
         this.router.navigate(['./productpurchase']);
         return;
       }
+      else{
+        this.loginError = true;
+      }
+      
     });
   }
 

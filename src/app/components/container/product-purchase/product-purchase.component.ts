@@ -26,6 +26,8 @@ export class ProductPurchaseComponent implements OnInit {
   isShipmentOptionEnabled: boolean;
   //productsInCart: productsInCart[] = [];
   cardNumber: number = 0;
+  expiration : string = "";
+  owner : string = "";
   deliverySelected: boolean = false;
   shipmentValid: boolean = true;
   isFieldsValid: boolean = false;
@@ -38,6 +40,7 @@ export class ProductPurchaseComponent implements OnInit {
   selectedDeliveryMode: DeliveryMode;
   productsInCart: ProductInCart[] = [];
   confirmation: Confirmation = new Confirmation();
+  shipmentPrices : object[] = [];
 
   constructor(private productService: ProductService, private purchaseService: PurchaseService,
     private router: Router, private bookStoreService: BookStoreService) { }
@@ -100,44 +103,52 @@ export class ProductPurchaseComponent implements OnInit {
     this.checkIfValid();
   }
 
-  numberChanged(e) {
-    this.cardNumber = e;
-    this.checkIfValid();
-  }
 
   checkIfValid() {
     this.confirmation.shipmentOption = this.shipmentMode;
     this.bookStoreService.createConfirmation(this.confirmation);
-    this.isFieldsValid = this.productsInCart.length != 0 && this.deliverySelected && this.shipmentValid && this.cardNumber != 0;
+    let isOwnerValid = this.confirmation.owner != undefined &&  this.confirmation.owner != "";
+    let isExpirationValid = this.confirmation.expiration != undefined && this.confirmation.expiration !="";
+    this.isFieldsValid = this.productsInCart.length != 0 && this.deliverySelected && this.shipmentValid && this.confirmation.cardNumber != 0 && isOwnerValid && isExpirationValid ;
   }
 
   goToConfirmation() {
+    this.calcShipmentCost()
     // this.bookStoreService.createConfirmation(this.confirmation);
     this.router.navigate(['./chargeconfirmation']);
   }
 
-  highlight(product) {
-    this.productsInCart.forEach(pr => {
-      if (pr.product.ProductId == product.product.ProductId) {
-        pr.isSelected = !pr.isSelected;
-        if (pr.isSelected) {
-          this.productsToRemove.push(pr.product.ProductId);
-        }
-        else {
-          let index = this.productsToRemove.indexOf(pr.product.ProductId);
-          this.productsToRemove.splice(index, 1);
-        }
-      }
+  calcShipmentCost (){
+    this.bookStoreService.getShipmentPrices().subscribe(response => {
+      this.shipmentPrices = JSON.parse(response._body);
+      let options;
+      this.shipmentPrices.forEach(option=>{
+
+      })
+      debugger;
     });
-    if (this.productsToRemove.length > 0) this.isRemoveButtonEnabled = true;
-    else this.isRemoveButtonEnabled = false;
+  }
+
+  highlight(product,index) {
+      product.isSelected = !product.isSelected;
+      if (product.isSelected == true) {
+        this.productsToRemove.push(index);
+      }
+      else {
+        this.productsToRemove.splice(index, 1);
+      }
+
+      if (this.productsToRemove.length > 0) this.isRemoveButtonEnabled = true;
+       else this.isRemoveButtonEnabled = false;
   }
 
   removeFromCart() {
-    this.productsToRemove.forEach(p => {
-      let index = this.productsInCart.findIndex(pr => pr.product.ProductId == p);
+    this.productsToRemove.forEach(index => {
+      this.productsInCart[index].isSelected = false;
       this.productsInCart.splice(index, 1);
     });
+    this.productsToRemove = [];
+    if(this.productsInCart.length == 0){ this.isRemoveButtonEnabled = false}
     this.bookStoreService.addToCart(this.productsInCart);
   }
 

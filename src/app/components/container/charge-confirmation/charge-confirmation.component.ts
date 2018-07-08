@@ -38,7 +38,6 @@ export class ChargeConfirmationComponent implements OnInit {
       this.transaction.DeliveryMode = this.confirmation.deliveryMode;
       this.transaction.ShipmentCost = this.confirmation.shipmentCost;
       this.transaction.ShipmentOption = this.confirmation.shipmentOption;
-      debugger;
     });
     this.bookStoreService.cart.subscribe(cart => {
       this.confirmation.products = cart;
@@ -63,6 +62,7 @@ export class Confirmation {
   creditCardType: CreditCardType;
   cardNumber: number;
   owner: string;
+  expiration: string;
   deliveryMode: DeliveryMode;
   deliveryDate: Date;
   shipmentOption: ShipmentOption;
