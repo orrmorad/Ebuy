@@ -135,7 +135,8 @@ export class ProductPurchaseComponent implements OnInit {
         this.productsToRemove.push(index);
       }
       else {
-        this.productsToRemove.splice(index, 1);
+        let indexToRemove = this.productsToRemove.indexOf(index);
+        this.productsToRemove.splice(indexToRemove, 1);
       }
 
       if (this.productsToRemove.length > 0) this.isRemoveButtonEnabled = true;
