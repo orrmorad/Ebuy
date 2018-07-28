@@ -5,12 +5,10 @@
         <div>What is your preffered language?</div>
         <hr>
         <div class="select-container">
-          <select>
-            <option>Engilsh</option>
-            <option>French</option>
-            <option>German</option>
-            <option>Italian</option>
+          <select (change)="changeOption($event.target.value)">
+            <option *ngFor="let option of languageOptions" [value]="option">{{option}}</option>
           </select>
+          <label *ngIf="isNotEnglish">only English is available</label>
         </div>
       </div>
     </div>
