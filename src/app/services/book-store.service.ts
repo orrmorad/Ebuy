@@ -35,12 +35,12 @@ export class BookStoreService {
   }
 
   createConfirmation(confirmation: Confirmation) {
-    var _deliveryDate = new Date();
-    confirmation.deliveryDate = new Date();
-    if (DeliveryMode[DeliveryMode.electronically] == DeliveryMode[DeliveryMode[confirmation.deliveryMode]]) {
-      confirmation.deliveryDate.setDate(_deliveryDate.getDate() + 1);
-      confirmation.shipmentCost = 0;
-    }
+   // var _deliveryDate = new Date();
+   // confirmation.deliveryDate = new Date();
+    // if (DeliveryMode[DeliveryMode.electronically] == DeliveryMode[DeliveryMode[confirmation.deliveryMode]]) {
+    //   confirmation.deliveryDate.setDate(_deliveryDate.getDate() + 1);
+    //   confirmation.shipmentCost = 0;
+    // }
     this.confirmation.next(confirmation);
   }
 

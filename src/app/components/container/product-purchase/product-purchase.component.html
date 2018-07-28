@@ -16,7 +16,7 @@
               <label for="shipment-option">Shipment Option</label>
               <select class="form-control" id="shipment-option" [disabled]="!isShipmentOptionEnabled" (change)="changeShipmentMode($event.target.value)">
                 <option disabled selected value> -- select an option -- </option>
-                <option *ngFor="let s of shipmentOptions">{{s.data}}</option>
+                <option *ngFor="let s of shipmentOptions; let i = index " [value]="i" >{{s.data}}</option>
               </select>
             </div>
             <div class="form-group btn-address">
@@ -36,7 +36,7 @@
                   </div>
                   <div class="col-md-6">
                     <label for="credit-number">Card #</label>
-                    <input name="credit-number" class="form-control" type="text" (input)="checkIfValid()" [(ngModel)]="confirmation.cardNumber">
+                    <input name="credit-number" class="form-control" type="number" (input)="checkIfValid()" [(ngModel)]="confirmation.cardNumber">
                   </div>
                   <div class="col-md-6">
                     <label for="expiration">Expiration Date</label>
@@ -93,4 +93,4 @@
   </div>
 </div>
 <div class="overlay" *ngIf="showAddressDetailsPopup"></div>
-<app-shipment-address *ngIf="showAddressDetailsPopup" (OnClose)="showAddressDetailsPopup=false" (OnCloseConfirm)="showAddressDetailsPopup=false; confirm($event)" [deliveryMode]="selectedDeliveryMode"></app-shipment-address>
+<app-shipment-address *ngIf="showAddressDetailsPopup" (OnClose)="showAddressDetailsPopup=false; cancle($event)" (OnCloseConfirm)="showAddressDetailsPopup=false; confirm($event)" [deliveryMode]="selectedDeliveryMode"></app-shipment-address>

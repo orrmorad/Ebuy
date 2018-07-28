@@ -30,7 +30,6 @@ export class CustomerService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
-    debugger;
     var body = {
       'MemberId': customerId,
       'LoginName': loginName,

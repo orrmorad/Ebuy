@@ -53,8 +53,17 @@
             </div>
             <div class="panel-body">
               <div>
-                <label for="email">Email Address</label>
-                <input name="email" class="form-control" type="text">
+                  <label for="email">Email Address</label>
+                  <input id="emailOfUser" name="email" class="form-control" type="email" [(ngModel)]="email" required #emailOfUser="ngModel"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  <div class="md-errors-spacer" [hidden]="emailOfUser.valid || emailOfUser.untouched">
+                    <div *ngIf="emailOfUser.errors && emailOfUser.errors.required" style="color:red">
+                      Email is required
+                    </div>
+                    <div *ngIf="emailOfUser.errors && emailOfUser.errors.pattern" style="color:red">
+                      Email is invalid
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

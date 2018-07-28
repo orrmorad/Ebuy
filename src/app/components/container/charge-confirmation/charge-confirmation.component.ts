@@ -54,7 +54,6 @@ export class ChargeConfirmationComponent implements OnInit {
     });
     this.confirmation.totalPrice += this.confirmation.shipmentCost ? this.confirmation.shipmentCost : 0;
     this.transaction.TotalCost = this.confirmation.totalPrice;
-    debugger;
   }
 }
 
@@ -65,7 +64,7 @@ export class Confirmation {
   expiration: string;
   deliveryMode: DeliveryMode;
   deliveryDate: Date;
-  shipmentOption: ShipmentOption;
+  shipmentOption: string;
   products: ProductInCart[];
   shipmentCost: number;
   totalPrice: number;

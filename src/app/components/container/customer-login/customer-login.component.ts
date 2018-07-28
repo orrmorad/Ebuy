@@ -4,6 +4,7 @@ import { IClubMember, ICasualCustomer } from '../../../../Models';
 import { CustomerService } from '../../../services/customer.service';
 import { Router } from '@angular/router';
 import { debug } from 'util';
+import { UserService } from '../../../services/user-service.service'
 
 @Component({
   selector: 'app-customer-login',
@@ -20,7 +21,7 @@ export class CustomerLoginComponent implements OnInit {
   loggedInUser: IClubMember;
   loginError: boolean;
 
-  constructor(private http: Http, private customerService: CustomerService, private router: Router) { }
+  constructor(private http: Http, private customerService: CustomerService, private router: Router, private UserService : UserService) { }
 
   ngOnInit() {
     this.getClubMembers();
@@ -51,20 +52,21 @@ export class CustomerLoginComponent implements OnInit {
     this.loginError = false;
     this.clubMembers.forEach(member => {
       if (member.LoginName === this.loginName && member.Password === this.password) {
-          this.customerService.getClubMember(member.MemberId)
-            .subscribe(
-              response => {
-                this.loggedInUser = response;
-                localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
-              }
-            )
+        this.customerService.getClubMember(member.MemberId)
+          .subscribe(
+            response => {
+              this.loggedInUser = response;
+              this.UserService.updateUser(this.loggedInUser);
+              localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
+            }
+          )
         this.router.navigate(['./productpurchase']);
         return;
       }
-      else{
+      else {
         this.loginError = true;
       }
-      
+
     });
   }
 

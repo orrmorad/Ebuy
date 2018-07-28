@@ -43,7 +43,7 @@
               <label for="delivery-mode">Delivery Mode</label>
               <input name="delivery-mode" type="text" class="form-control" [(ngModel)]="confirmation.deliveryMode" disabled>
               <label for="delivery-date">Delivery Date</label>
-              <input name="delivery-date" type="text" class="form-control" [ngModel]="confirmation.deliveryDate | date:'shortDate'" disabled>
+              <input name="delivery-date" type="text" class="form-control" [ngModel]="confirmation.deliveryDate | date" disabled>
               <div *ngIf=!isElectronically>
                 <label for="shipment-option">Shipment Option</label>
                 <input name="shipment-option" type="text" class="form-control" [(ngModel)]="confirmation.shipmentOption" disabled>

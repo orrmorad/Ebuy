@@ -20,9 +20,10 @@ import { CustomerService } from './services/customer.service';
 import { RegisterCasualPopupComponent } from './common/components/register-casual-popup/register-casual-popup.component';
 import { ProductService } from './services/product.service';
 import { BookStoreService } from './services/book-store.service';
-import {PurchaseService} from './services/purchase.service';
+import { PurchaseService } from './services/purchase.service';
 import { AddressConfirmationPopupComponent } from './common/components/address-confirmation-popup/address-confirmation-popup.component';
 import { ConfirmEqualValidatorDirective } from './common/confirm-equal-validator.directive';
+import { UserService} from './services/user-service.service';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ConfirmEqualValidatorDirective } from './common/confirm-equal-validator
     CustomerService,
     ProductService,
     BookStoreService,
-    PurchaseService
+    PurchaseService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

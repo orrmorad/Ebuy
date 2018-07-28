@@ -20,6 +20,12 @@ export class PurchaseService {
       .catch(this.handleErrorObservable);
   }
 
+  getCreditCardTypes(){
+    return this.http.get(uri + '/values/GetCreditCard')
+    // .map(response => )
+    .catch(this.handleErrorObservable);
+  }
+
 
   private handleErrorObservable(error: Response | any) {
     console.error(error.message || error);

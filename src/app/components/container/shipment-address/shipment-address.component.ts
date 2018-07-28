@@ -4,6 +4,7 @@ import { DeliveryMode, ICountry } from '../../../../Models';
 import { BookStoreService } from '../../../services/book-store.service';
 import { CustomerService } from '../../../services/customer.service'
 import { IShipmentDetails } from '../../../../Models';
+import { UserService } from '../../../services/user-service.service'
 
 @Component({
   selector: 'app-shipment-address',
@@ -26,15 +27,17 @@ export class ShipmentAddressComponent implements OnInit {
   addressDetails: any;
   loggedInUser: any = null;
   state: string;
+  email : string;
   shipmentDetails: IShipmentDetails = {} as IShipmentDetails;
   @Input() deliveryMode: string;
   @Output() OnCloseConfirm = new EventEmitter<any>();
   @Output() OnClose = new EventEmitter<any>();
 
-  constructor(private router: Router, private customerService: CustomerService) { }
+  constructor(private router: Router, private customerService: CustomerService, private UserService: UserService) { }
 
   ngOnInit() {
     this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    this.UserService.updateUser(this.loggedInUser);
     this.selectedCountryId = this.loggedInUser.Country.CountryId;
 
     this.initData();
@@ -75,11 +78,20 @@ export class ShipmentAddressComponent implements OnInit {
     this.shipmentDetails.ZipCode = this.zipCode;
     this.shipmentDetails.Pob = this.pob;
     this.shipmentDetails.State = this.state;
+    this.shipmentDetails.Email = this.email;
     this.OnCloseConfirm.emit(this.shipmentDetails);
   }
 
   onCloseCancel() {
-    this.OnClose.emit();
+    this.shipmentDetails.Country = undefined;
+    this.shipmentDetails.City = '';
+    this.shipmentDetails.HouseNumber = undefined;
+    this.shipmentDetails.Street = '';
+    this.shipmentDetails.ZipCode = undefined;
+    this.shipmentDetails.Pob = undefined;
+    this.shipmentDetails.State = undefined;
+    this.shipmentDetails.Email = '';
+    this.OnClose.emit(this.shipmentDetails);
   }
 
 }

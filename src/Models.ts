@@ -13,7 +13,7 @@ export interface IProduct {
     PublicationDate: Date;
     ProductAbstract: string;
     Price: number;
-    isSelected : boolean;
+    isSelected: boolean;
 }
 
 export interface IPurchasedProduct {
@@ -69,7 +69,7 @@ export interface ITransaction {
     CreditCardType: CreditCardType;
     DeliveryMode: DeliveryMode;
     DeliveryDate: Date;
-    ShipmentOption: ShipmentOption;
+    ShipmentOption: string;
     ShipmentCost: number;
     TotalCost: number;
     Owner: string;
@@ -114,6 +114,16 @@ export interface IShipmentArea {
     AreaId: number;
     AreaName: string;
 }
+
+export interface ICreditCardType {
+    CardId: number;
+    Type: number;
+    NumOfDigit: number;
+    Prefix: number;
+    Transactions: ITransaction[];
+}
+
+
 
 enum UserType {
     Marketing, Financial, Administrator
