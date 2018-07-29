@@ -22,7 +22,6 @@ export class RegisterCasualPopupComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    console.log(this.myEmail.nativeElement);
   }
 
   submitDetails() {
@@ -40,7 +39,6 @@ export class RegisterCasualPopupComponent implements OnInit, AfterViewInit  {
 
   detaisChanged() {
     this.isAllFieldsValid = this.address != "" && this.email != "" && this.name != "" && this.myEmail.errors == null;
-    console.log(this.myEmail);
   }
 
 }
