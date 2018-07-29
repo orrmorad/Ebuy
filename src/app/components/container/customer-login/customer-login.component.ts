@@ -41,7 +41,7 @@ export class CustomerLoginComponent implements OnInit {
 
   getDetails(e: ICasualCustomer) {
     this.showPopup = false;
-    this.customerService.addCasualMember(e.CustomerId, e.Name, e.Address, e.Email)
+    this.customerService.addCasualMember(e.Name, e.Address, e.Email)
       .subscribe(response => {
         return;
       });

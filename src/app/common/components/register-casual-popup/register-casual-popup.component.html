@@ -9,19 +9,27 @@
       <div class="panel-body">
         <form id="loginform" class="form-horizontal" role="form" (ngSubmit)="submitDetails()">
           <div class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="customerId" (ngModelChange)="detaisChanged()" name="Id" value="" placeholder="Id">
-          </div>
-          <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="detaisChanged()" name="name" placeholder="Name">
           </div>
           <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="address" (ngModelChange)="detaisChanged()" name="address" placeholder="Address">
           </div>
           <div class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="email" (ngModelChange)="detaisChanged()" name="email" placeholder="Email">
+            <input id="emailOfUser" type="email" class="form-control" [(ngModel)]="email" (ngModelChange)="detaisChanged()" name="email" placeholder="Email"
+            required #emailOfUser="ngModel"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+          <div class="md-errors-spacer" [hidden]="emailOfUser.valid || emailOfUser.untouched">
+            <div *ngIf="emailOfUser.errors && emailOfUser.errors.required" style="color:red">
+              Email is required
+            </div>
+            <div *ngIf="emailOfUser.errors && emailOfUser.errors.pattern" style="color:red">
+              Email is invalid
+            </div>
+          </div>
           </div>
           <div class="buttons-container">
             <button type="submit" class="btn btn-primary" [disabled]="!isAllFieldsValid">Confirm</button>
+            <button type="button" class="btn btn-danger" (click)="close()">Cancel</button>
           </div>
         </form>
       </div>

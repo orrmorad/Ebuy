@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit  } from '@angular/core';
 import { CustomerService } from '../../../services/customer.service';
 
 @Component({
@@ -6,8 +6,8 @@ import { CustomerService } from '../../../services/customer.service';
   templateUrl: './register-casual-popup.component.html',
   styleUrls: ['./register-casual-popup.component.scss']
 })
-export class RegisterCasualPopupComponent implements OnInit {
-  customerId: number;
+export class RegisterCasualPopupComponent implements OnInit, AfterViewInit  {
+  @ViewChild('emailOfUser') myEmail: any;
   name: string = "";
   address: string = "";
   email: string = "";
@@ -21,9 +21,12 @@ export class RegisterCasualPopupComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    console.log(this.myEmail.nativeElement);
+  }
+
   submitDetails() {
     this.details = {
-      'CustomerId': this.customerId,
       'Name': this.name,
       'Address': this.address,
       'Email': this.email
@@ -36,7 +39,8 @@ export class RegisterCasualPopupComponent implements OnInit {
   }
 
   detaisChanged() {
-    this.isAllFieldsValid = this.customerId && this.address != "" && this.email != "" && this.name != "";
+    this.isAllFieldsValid = this.address != "" && this.email != "" && this.name != "" && this.myEmail.errors == null;
+    console.log(this.myEmail);
   }
 
 }

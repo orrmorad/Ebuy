@@ -49,20 +49,16 @@ export class CustomerService {
       .catch(this.handleErrorObservable);
   }
 
-  addCasualMember(customerId: number, name: string, address: string, email: string) {
+  addCasualMember(name: string, address: string, email: string) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
     var body = {
-      'customerId': customerId,
       'Name': name,
       'Address': address,
       'Email': email
     };
     return this.http.post(uri + '/customer/AddCasualCustomer', body, { headers: headers })
-      .map((res) => {
-        res.json();
-      })
       .catch(this.handleErrorObservable);
   }
 
