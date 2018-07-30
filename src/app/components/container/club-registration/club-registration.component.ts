@@ -3,6 +3,7 @@ import { CustomerService } from '../../../services/customer.service';
 import { BookStoreService } from '../../../services/book-store.service';
 import { Router } from '@angular/router';
 import { ICountry, IShipmentArea } from '../../../../Models';
+import {UserService} from '../../../services/user-service.service';
 
 @Component({
   selector: 'app-club-registration',
@@ -10,26 +11,30 @@ import { ICountry, IShipmentArea } from '../../../../Models';
   styleUrls: ['./club-registration.component.scss']
 })
 export class ClubRegistrationComponent implements OnInit {
-  isValidDetailsProvided: boolean = true;
+  isValidDetailsProvided: boolean = false;
   loginName: string = '';
   password: string = '';
   reEnterPassword: string = '';
   email: string = '';
   city: string = '';
-  country: string = '';
+  country: ICountry;
   street: string = '';
-  houseNumber: number;
+  houseNumber: string = '';
   phoneNumber: string = '';
-  isPasswordMatch: boolean = true;
-  isEmailValid: boolean = true;
+  isPasswordMatch: boolean = false;
+  isEmailValid: boolean = false;
+  isLoginNameValid : boolean = true;
+  isPasswordValid : boolean = true;
   customerId: number;
-  pattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+  emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+  passwordAndNamePattern = "^[A-Za-z0-9]*[A-Za-z0-9][A-Za-z0-9]*$";
+  oneLetterOneNumberPattern = "([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*";
   errorMessage: string;
   countries: ICountry[] = [];
   shipmentAreas: IShipmentArea[] = [];
 
 
-  constructor(private router: Router, private customerService: CustomerService, private bookStoreService: BookStoreService) { }
+  constructor(private router: Router, private customerService: CustomerService, private bookStoreService: BookStoreService, private userService : UserService ) { }
 
   ngOnInit() {
     this.getCountries();
@@ -47,7 +52,7 @@ export class ClubRegistrationComponent implements OnInit {
   }
 
   changeModel() {
-    if (this.customerId && this.loginName && this.password && this.reEnterPassword && this.isPasswordMatch && this.isEmailValid && this.phoneNumber && this.city, this.street) {
+    if (this.loginName && this.password && this.reEnterPassword && this.email && this.isPasswordMatch && this.isPasswordValid && this.isLoginNameValid && this.isEmailValid) {
       this.isValidDetailsProvided = true;
     }
     else {
@@ -56,19 +61,45 @@ export class ClubRegistrationComponent implements OnInit {
   }
 
   validatePassword() {
-    if (this.password == this.reEnterPassword) {
-      this.isPasswordMatch = true;
+    if (this.validionOfNameAndPassword(this.password) == true) {
+      if (this.password == this.reEnterPassword) {
+        this.isPasswordMatch = true;
+        this.isPasswordValid = true;
+        this.changeModel();
+        return;
+      }
+    }
+    this.isPasswordValid = false;
+    this.isPasswordMatch = false;
+    this.isValidDetailsProvided = false;
+  }
+
+  validionOfNameAndPassword(fieldToCheck: string) {
+    var regexLettersAndNumbers = new RegExp(this.passwordAndNamePattern);
+    var regexOneLetterOneNumber = new RegExp(this.oneLetterOneNumberPattern);
+    if (regexLettersAndNumbers.exec(fieldToCheck) && fieldToCheck == regexLettersAndNumbers.exec(fieldToCheck)[0]) {
+      if (fieldToCheck.length >= 6 && fieldToCheck.length <= 10) {
+        if (regexOneLetterOneNumber.exec(fieldToCheck) && fieldToCheck == regexOneLetterOneNumber.exec(fieldToCheck)[0]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  validLoginName(){
+    if(this.validionOfNameAndPassword(this.loginName) == true){
+      this.isLoginNameValid = true;
       this.changeModel();
+      return;
     }
-    else {
-      this.isPasswordMatch = false;
-      this.isValidDetailsProvided = false;
-    }
+    this.isLoginNameValid = false;
+    this.isValidDetailsProvided = false;
   }
 
   validateEmail() {
-    var regex = new RegExp(this.pattern);
-    if (regex.exec(this.email) && this.email == regex.exec(this.email)[0]) {
+    var regex = new RegExp(this.emailPattern);
+    if (this.email && this.email != "" && regex.exec(this.email) && this.email == regex.exec(this.email)[0]) {
       this.isEmailValid = true;
       this.changeModel();
     }
@@ -78,13 +109,32 @@ export class ClubRegistrationComponent implements OnInit {
     }
   }
 
+  changeCountry(index){
+    debugger;
+    this.country = this.countries[index];
+  }
+
   add() {
-    var index = this.countries.findIndex(c => c.Country == this.country);
-    var memberCountry = this.countries[index];
     this.customerService.addClubMember(this.customerId, this.loginName, this.password,
-      memberCountry, this.city, this.street, this.houseNumber, this.email, this.phoneNumber, new Date())
+      this.country, this.city, this.street, this.houseNumber, this.email, this.phoneNumber, new Date())
       .subscribe(response => {
-        this.router.navigate(['./home']);
+        if(response.status == 200){
+          alert("welcome to Ebuy "+ this.loginName);
+          this.customerService.getClubMemberByNameAndPassword(this.loginName,this.password)
+          .subscribe(
+            response => {
+              this.userService.updateUser(response);
+              localStorage.setItem('loggedInUser', JSON.stringify(response));
+              this.router.navigate(['./productpurchase']);
+            }
+          )
+          
+        }
+        else{
+          alert("someting went error");
+          this.router.navigate(['./home']);
+        }
+        
       },
         error => this.errorMessage = <any>error)
   }

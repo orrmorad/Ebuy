@@ -52,7 +52,7 @@ export class CustomerLoginComponent implements OnInit {
     this.loginError = false;
     this.clubMembers.forEach(member => {
       if (member.LoginName === this.loginName && member.Password === this.password) {
-        this.customerService.getClubMember(member.MemberId)
+        this.customerService.getClubMember(member.id)
           .subscribe(
             response => {
               this.loggedInUser = response;

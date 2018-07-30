@@ -25,9 +25,16 @@ export class CustomerService {
       .catch(this.handleErrorObservable);
   }
 
+  getClubMemberByNameAndPassword (loginName: string, password: string){
+    return this.http.get(uri + `/customer/GetClubMemberByNameAndPassword/${loginName}/${password}`)
+    .map(response => response.json())
+    .catch(this.handleErrorObservable);
+  }
+
   addClubMember(customerId: number, loginName: string, password: string, country: ICountry,
-    city: string, street: string, houseNumber: number, email: string, phone: string, firstRegistration: Date) {
+    city: string, street: string, houseNumber: string, email: string, phone: string, firstRegistration: Date) {
     var headers = new Headers();
+    debugger;
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
     var body = {
@@ -43,9 +50,6 @@ export class CustomerService {
       'FirstRegistration': firstRegistration
     };
     return this.http.post(uri + '/customer/PostClubMember', body, { headers: headers })
-      .map((res) => {
-        res.json();
-      })
       .catch(this.handleErrorObservable);
   }
 

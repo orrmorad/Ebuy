@@ -9,7 +9,7 @@
     margin-bottom: 2.2em;
   }
   .panel-body {
-    padding-top: 30px
+    padding-top: 0px;
   }
   .buttons-container {
     display: flex;
@@ -18,5 +18,25 @@
   .form-group{
     margin-left: 0 !important;
     margin-right: 0 !important;
+    width: 94%;
+  }
+  .help{
+    font-size: 15px !important;
+    float: right;
+  }
+
+  .bigger-font::after {
+    font-size: 18px !important;
+  }
+
+  .countries{
+    position: relative;
+    margin-bottom: 1em;
+  }
+  
+  .colorError{
+    color: #a94442;
   }
 }
+
+
