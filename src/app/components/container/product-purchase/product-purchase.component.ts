@@ -298,7 +298,6 @@ export class ProductPurchaseComponent implements OnInit {
 
   confirm(e) {
     this.shipmentDetails = e;
-    //debugger;
   }
 
   cancle(e) {

@@ -110,7 +110,6 @@ export class ClubRegistrationComponent implements OnInit {
   }
 
   changeCountry(index){
-    debugger;
     this.country = this.countries[index];
   }
 

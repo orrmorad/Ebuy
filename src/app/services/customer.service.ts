@@ -34,7 +34,6 @@ export class CustomerService {
   addClubMember(customerId: number, loginName: string, password: string, country: ICountry,
     city: string, street: string, houseNumber: string, email: string, phone: string, firstRegistration: Date) {
     var headers = new Headers();
-    debugger;
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
     var body = {
