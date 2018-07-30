@@ -123,7 +123,7 @@ export class ProductPurchaseComponent implements OnInit {
     //this.bookStoreService.createConfirmation(this.confirmation);
     let isOwnerValid = this.confirmation.owner != undefined && this.confirmation.owner != "";
     let isExpirationValid = this.confirmation.expiration != undefined && this.confirmation.expiration != "";
-    this.isFieldsValid = true /*this.productsInCart.length != 0 && this.deliverySelected && this.shipmentValid && this.confirmation.cardNumber != 0 && isOwnerValid && isExpirationValid;*/
+    this.isFieldsValid = this.productsInCart.length != 0 && this.deliverySelected && this.shipmentValid && this.confirmation.cardNumber != 0 && isOwnerValid && isExpirationValid;
   }
 
   goToConfirmation() {
@@ -131,25 +131,25 @@ export class ProductPurchaseComponent implements OnInit {
     if (response) {
       return;
     }
-    // else {
-      // response = null;
-      // response = this.validExpirationDate();
-      // if (response) {
-      //   return;
-      // }
-    //   else {
-    //     if (this.selectedDeliveryMode === 'electronically') {
-    //       if (this.shipmentDetails.Email == "" || this.shipmentDetails.Email == undefined) {
-    //         alert("please enter emaill in the shipment address button");
-    //         return;
-    //       }
-    //       this.confirmation.email = this.shipmentDetails.Email;
-    //     }
-    //     this.calcShipmentCost()
-    //     this.bookStoreService.createConfirmation(this.confirmation);
-    //     this.router.navigate(['./chargeconfirmation']);
-    //   }
-    // }
+    else {
+      response = null;
+      response = this.validExpirationDate();
+      if (response) {
+        return;
+      }
+      else {
+        if (this.selectedDeliveryMode === 'electronically') {
+          if (this.shipmentDetails.Email == "" || this.shipmentDetails.Email == undefined) {
+            alert("please enter emaill in the shipment address button");
+            return;
+          }
+          this.confirmation.email = this.shipmentDetails.Email;
+        }
+        this.calcShipmentCost()
+        this.bookStoreService.createConfirmation(this.confirmation);
+        this.router.navigate(['./chargeconfirmation']);
+      }
+    }
   }
 
   calcShipmentCost() {
